@@ -28,7 +28,6 @@ public class RegistrationController
 	private DoctorRegistrationService doctorRegisterService;
 	
 	@PostMapping("/registeruser")
-	@CrossOrigin(origins = "http://localhost:4200")
 	public User registerUser(@RequestBody User user) throws Exception
 	{
 		String currEmail = user.getEmail();
@@ -47,7 +46,6 @@ public class RegistrationController
 	}
 	
 	@PostMapping("/registerdoctor")
-	@CrossOrigin(origins = "http://localhost:4200")
 	public Doctor registerDoctor(@RequestBody Doctor doctor) throws Exception
 	{
 		String currEmail = doctor.getEmail();
@@ -65,7 +63,6 @@ public class RegistrationController
 	}
 	
 	@PostMapping("/addDoctor")
-	@CrossOrigin(origins = "http://localhost:4200")
 	public Doctor addNewDoctor(@RequestBody Doctor doctor) throws Exception
 	{
 		Doctor doctorObj = null;
@@ -74,7 +71,6 @@ public class RegistrationController
 	}
 	
 	@GetMapping("/gettotalusers")
-	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<List<Integer>> getTotalSlots() throws Exception
 	{
 		List<User> users = userRegisterService.getAllUsers();

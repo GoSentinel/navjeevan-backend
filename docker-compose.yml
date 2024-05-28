@@ -1,0 +1,35 @@
+version: '3.3'
+
+services:
+  app:
+    image: 'ecstasy1337/navjeevan-backend-1:latest'
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=toor
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/healthcaresystem
+      - SPRING_DATASOURCE_USERNAME=postgres #your required name
+      - SPRING_DATASOURCE_PASSWORD=toor # your required password
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8000:8000"
+
+  db:
+    image: postgres
+    container_name: db
+    environment:
+      - POSTGRES_USER=postgres  #your required name
+      - POSTGRES_PASSWORD=toor # your required password
+      - POSTGRES_DB=healthcaresystem
+  reverse_proxy:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./logs/nginx:/var/logs
+    ports:
+      - '80:80'
+      - '443:443'
+    depends_on:
+      - app
